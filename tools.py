@@ -6,8 +6,7 @@ load_dotenv()
 def save_report(filename,content):
     if not os.path.exists("reports"):
         os.makedirs("reports")
-    with open(filename,"a",encoding="utf-8") as f:
-        # f.write(content + "\n\n---\n\n")
+    with open(filename,"w",encoding="utf-8") as f: # use 'a' for append
         f.write(content)
         return f"Report saved to {filename}"
 
@@ -18,7 +17,6 @@ def read_report(filename):
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
         return content
-
 def ask_ai(query):
     import requests, base64
 
@@ -33,7 +31,7 @@ def ask_ai(query):
     payload = {
     "model": "mistralai/mistral-medium-3.5-128b",
     "reasoning_effort": "high",
-    "messages": [{"role":"user","content":"HI TELL ME WHO IS YOUR GOD IN SHORT IN 5 LIKES BELOW 250 CHARS"}],
+    "messages": [{"role":"user","content":query}],
     "max_tokens": 16384,
     "temperature": 0.70,
     "top_p": 1.00,
@@ -56,7 +54,7 @@ def ask_ai(query):
         content = response_json["choices"][0]["message"]["content"]
         # content = response_json["choices"][0]["message"]
 
-        print(content)
+        # print(content)
 
     if content:
         cleaned_text = "\n".join(

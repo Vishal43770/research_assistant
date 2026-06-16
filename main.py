@@ -1,73 +1,101 @@
-# main file the exceutes the agent 
+# # main file the exceutes the agent 
 
-import os 
-from tools import save_report
-
-
-# import requests, base64
-
-# invoke_url = "https://integrate.api.nvidia.com/v1/chat/completions"
-# stream = False
+# import os 
+# from tools import save_report
 
 
-# load_dotenv()
+# # import requests, base64
 
-# headers = {
-#   "Authorization": os.getenv("API_KEY"),
-#   "Accept": "text/event-stream" if stream else "application/json"
-# }
+# # invoke_url = "https://integrate.api.nvidia.com/v1/chat/completions"
+# # stream = False
 
-# payload = {
-#   "model": "mistralai/mistral-medium-3.5-128b",
-#   "reasoning_effort": "high",
-#   "messages": [{"role":"user","content":"HI TELL ME WHO IS YOUR GOD IN SHORT IN 5 LIKES BELOW 250 CHARS"}],
-#   "max_tokens": 16384,
-#   "temperature": 0.70,
-#   "top_p": 1.00,
-#   "stream": stream
-# }
 
-# response = requests.post(invoke_url, headers=headers, json=payload)
+# # load_dotenv()
 
-# if response.status_code != 200:
-#     print(f"Error {response.status_code}: {response.text}")
-#     exit(1)
+# # headers = {
+# #   "Authorization": os.getenv("API_KEY"),
+# #   "Accept": "text/event-stream" if stream else "application/json"
+# # }
 
-# content = ""
-# if stream:
-#     for line in response.iter_lines():
-#         if line:
-#             print(line.decode("utf-8"))
-# else:
-#     response_json = response.json()
-#     content = response_json["choices"][0]["message"]["content"]
-#     print(content)
+# # payload = {
+# #   "model": "mistralai/mistral-medium-3.5-128b",
+# #   "reasoning_effort": "high",
+# #   "messages": [{"role":"user","content":"HI TELL ME WHO IS YOUR GOD IN SHORT IN 5 LIKES BELOW 250 CHARS"}],
+# #   "max_tokens": 16384,
+# #   "temperature": 0.70,
+# #   "top_p": 1.00,
+# #   "stream": stream
+# # }
 
-# if content:
-#     cleaned_text = "\n".join(
-#         line.strip().lstrip("*").strip().replace("**", "")
-#         for line in content.splitlines()
-#     )
+# # response = requests.post(invoke_url, headers=headers, json=payload)
 
-# caling the save report function from tools.py
+# # if response.status_code != 200:
+# #     print(f"Error {response.status_code}: {response.text}")
+# #     exit(1)
 
-from tools import ask_ai
-query=[
-    """ 
-    can u explain what is right
-    """
-]
-import time
-start=time.time()
-content = ask_ai(query)
-end=time.time()
-print("time taken: ",end-start)
-result = save_report(os.path.join("reports", "report.md"), content)
-# print(content)
+# # content = ""
+# # if stream:
+# #     for line in response.iter_lines():
+# #         if line:
+# #             print(line.decode("utf-8"))
+# # else:
+# #     response_json = response.json()
+# #     content = response_json["choices"][0]["message"]["content"]
+# #     print(content)
+
+# # if content:
+# #     cleaned_text = "\n".join(
+# #         line.strip().lstrip("*").strip().replace("**", "")
+# #         for line in content.splitlines()
+# #     )
+
+# # caling the save report function from tools.py
+
+# from tools import ask_ai
+# query=[
+#     """ 
+#     can u explain what is right
+#     """
+# ]
+# import time
+# start=time.time()
+# content = ask_ai(query)
+# end=time.time()
+# print("time taken: ",end-start)
+# result = save_report(os.path.join("reports", "report.md"), content)
+# # print(content)
+# # print(result)
+
+# from tools import read_report
+
+# report_content = read_report(os.path.join("reports", "report.md"))
+# # print("\n--- Saved Report ---")
+# # print(report_content)
+
+
+
+
+
+
+
+
+
+# from agent import execute_agent
+
+# result = execute_agent("what is promt engineering")
+
 # print(result)
 
-from tools import read_report
 
-report_content = read_report(os.path.join("reports", "report.md"))
-# print("\n--- Saved Report ---")
-# print(report_content)
+from agent import execute_agent
+
+user_input = input("You: ")
+
+response = execute_agent(user_input)
+
+# print("\nAgent:")
+# print(response)
+
+
+
+
