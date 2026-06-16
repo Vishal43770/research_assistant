@@ -56,6 +56,15 @@ def execute_agent(user_input):
         state["action"] = "unknown"
         state["result"] = "I don't know what to do."
         print("\nCurrent State:")
+         for key, value in state.items():
+            if key == "result":
+                print(f"  {key}:")
+                # Print the markdown text with actual newlines indented
+                print("\n".join(f"    {line}" for line in value.splitlines()))
+            else:
+                print(f"  {key}: {value}")
+        # print(json.dumps(state, indent=4))
+        print("\ntime taken: ",end)
         print(json.dumps(state, indent=4))
         return "I don't know what to do."
 
